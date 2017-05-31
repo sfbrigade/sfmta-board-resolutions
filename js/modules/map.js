@@ -3,111 +3,14 @@ var mapModule = (function(window,$) {
     var MAPBOX_ACCESS_TOKEN = resourceTokensModule.MAPBOX_ACCESS_TOKEN;
     var MAPBOX_MAP_STYLE_ID = 'lightfox.1n10e3dp';
     var MAP_CONTAINER_ELEMENT_ID = 'map';
+    var ICON_RULES = configModule.rules
+    var DEFAULT_ICON = './gfx/img_markers_walking.png'
 
     var SEARCH_MARKER_GEOJSON = {
         type: 'Feature',
         geometry: { type: 'Point' },
         properties: { 'marker-size': 'large' }
     };
-/*the following objects sets the custom marker icons for each CSCategory*/
-
-  var assaultIcon = L.icon({
-	iconUrl: './gfx/assault.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var arsonIcon = L.icon({
-  iconUrl: './gfx/arson.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var drugsIcon = L.icon({
-	iconUrl: './gfx/drugs.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var burglaryIcon = L.icon({
-  iconUrl: './gfx/burglary.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var robberyIcon = L.icon({
-  iconUrl: './gfx/robbery.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var weaponsIcon = L.icon({
-  iconUrl: './gfx/weapons.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var sexIcon = L.icon({
-  iconUrl: './gfx/sex.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var hateIcon = L.icon({
-  iconUrl: './gfx/hate.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var liquorIcon = L.icon({
-  iconUrl: './gfx/liquor.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var stalkingIcon = L.icon({
-  iconUrl: './gfx/stalking.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var domesticIcon = L.icon({
-  iconUrl: './gfx/domestic.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var datingIcon = L.icon({
-  iconUrl: './gfx/dating.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var motorIcon = L.icon({
-  iconUrl: './gfx/motor.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
-
-  var crimeIcon = L.icon({
-  iconUrl: './gfx/crime.png',
-  iconSize: [20, 32],
-  iconAnchor: [12, 31],
-  popupAnchor: [-3, -22],
-  });
 /*the following is an added object property that dictates t
 he icon properties using Mapbox Maki icons replaced with leaflet code*/
     /*var INCIDENT_MARKER_PROPERTIES = {
@@ -134,7 +37,10 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
     };
 
     var INCIDENT_CLUSTER_LAYER_SETTINGS = {
-        showCoverageOnHover: false
+        showCoverageOnHover: false,
+        maxClusterRadius: function(z) {
+          return z >= 17 ? 10 : 70
+        }
     };
 
     var METERS_PER_FOOT = 0.3048;
@@ -244,50 +150,42 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             $.extend(feature.properties, INCIDENT_MARKER_PROPERTIES);
         });*/
         /*the following is the actual descision making process of assigning icons to a certain CSCategory*/
-        incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function(layer) {
-          //this line below changes icon using leaflet Icon objects.
-          if (layer.feature.properties.cscategory==="BURGLARY"){
-            layer.setIcon(burglaryIcon);
-          } else if(layer.feature.properties.cscategory==="AGGRAVATED ASSAULT"){
-            layer.setIcon(assaultIcon);
-          } else if(layer.feature.properties.cscategory==="ROBBERY"){
-            layer.setIcon(robberyIcon);
-          } else if(layer.feature.properties.cscategory==="WEAPONS POSSESION"){
-            layer.setIcon(weaponsIcon);
-          } else if(layer.feature.properties.cscategory==="DRUG-RELATED VIOLATIONS"){
-            layer.setIcon(drugsIcon);
-          } else if(layer.feature.properties.cscategory==="SEX OFFENSES"){
-            layer.setIcon(sexIcon);
-          } else if(layer.feature.properties.cscategory==="HATE CRIMES"){
-            layer.setIcon(hateIcon);
-          } else if(layer.feature.properties.cscategory==="ARSON"){
-            layer.setIcon(arsonIcon);
-          } else if(layer.feature.properties.cscategory==="LIQUOR LAW"){
-            layer.setIcon(liquorIcon);
-          } else if(layer.feature.properties.cscategory==="STALKING"){
-            layer.setIcon(stalkingIcon);
-          } else if(layer.feature.properties.cscategory==="DOMESTIC VIOLENCE"){
-            layer.setIcon(domesticIcon);
-          } else if(layer.feature.properties.cscategory==="DATING VIOLENCE"){
-            layer.setIcon(datingIcon);
-          } else if(layer.feature.properties.cscategory==="MOTOR VEHICLE THEFT"){
-            layer.setIcon(motorIcon);
-          }else {
-            layer.setIcon(crimeIcon);
-          }
-            incidentClusterGroup.addLayer(layer);
-            layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties));
-        });
+        var actionMapping = {
+            'establish': 'g',
+            'rescind': 'r',
+            'revoke': 'r',
+            'extend': 'g',
+            'remove': 'r',
+            're-open': 'g',
+            'estabish': 'g',
+            'install': 'g',
+            'red zone': 'g',
+            'expand hours': 'g',
+            'recind': 'r',
+            'relocate': 'g'
+        }
+        incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function (layer) {
+          var iconUrl = DEFAULT_ICON
+          iconUrl = './gfx/img_markers_' + layer.feature.properties.category + '_' + actionMapping[layer.feature.properties.action.trim()] + '.png'
+          layer.setIcon(L.icon({
+            iconUrl: iconUrl,
+            iconSize: [40, 40],
+            iconAnchor: [20, 37],
+            popupAnchor: [-3, -22]
+          }))
+          incidentClusterGroup.addLayer(layer)
+          layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties))
+        })
         incidentLayer.clearLayers();
 
         map.addLayer(incidentLayer)
             .addLayer(incidentClusterGroup)
-            .fitBounds(searchAreaGroup.getBounds());
+            //.fitBounds(searchAreaGroup.getBounds());
     }
 
     function _buildIncidentPopupContent(properties) {
         var newDate = properties.date;
-        var formattedDate = newDate.slice(5,7) + "/" + newDate.slice(8,10) + "/" + newDate.slice(0,4);
+        var formattedDate = newDate.slice(5,7) + "/" + newDate.slice(8, 10) + "/" + newDate.slice(0,4);
         return properties.descript + " on " + formattedDate;
     }
 
@@ -302,7 +200,8 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
     return {
         init: _init,
         drawPolygonIncidents: _drawPolygonIncidents,
-        drawRadialIncidents: _drawRadialIncidents
+        drawRadialIncidents: _drawRadialIncidents,
+        drawRecords: _drawIncidents
     };
 
 })(window, jQuery);

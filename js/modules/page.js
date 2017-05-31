@@ -12,8 +12,7 @@ var pageModule = (function(window, $) {
         switch(viewModelModule.searchShapeType) {
             case 'polygon': _loadPolygonIncidentData(options); break;
             case 'radial': _loadRadialIncidentData(options); break;
-
-            default: _loadRadialIncidentData(options); break;
+            default: _loadDataWithoutGeoParam(options); break;
         }
     }
 
@@ -42,6 +41,27 @@ var pageModule = (function(window, $) {
             endDate: viewModelModule.endDate,
             searchGeoJson: viewModelModule.searchGeoJson
         };
+    }
+
+    function _loadDataWithoutGeoParam(options) {
+        var params = _buildParamsWithoutGeo();
+
+        var query = incidentService.buildAllDataQuery(params);
+        datasetLinksModule.refreshDownloadButtonUrls(query);
+
+        _showLoader();
+        incidentService.findAllWithoutGeoParam(params, function(json) {
+            _hideLoader();
+            mapModule.drawRecords(_convertJsonToGeoJson(json));
+            tableModule.loadDataToTable(json);
+        })
+    }
+
+    function _buildParamsWithoutGeo() {
+        return {
+            startDate: viewModelModule.startDate,
+            endDate: viewModelModule.endDate
+        }
     }
 
     function _loadRadialIncidentData(options) {
@@ -87,9 +107,11 @@ var pageModule = (function(window, $) {
     function _applyAddressFromViewModelCoordinates() {
         var latitude = viewModelModule.latitude;
         var longitude = viewModelModule.longitude;
-        addressService.getAddressFromCoordinates(latitude, longitude, function(address) {
+        if (latitude && longitude) {
+            addressService.getAddressFromCoordinates(latitude, longitude, function(address) {
             $('#input-address').val(address.features[0].place_name);
         });
+        }
     }
 
     function _applySearchRadiusFromViewModel() {

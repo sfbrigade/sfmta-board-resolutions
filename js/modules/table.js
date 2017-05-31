@@ -15,11 +15,6 @@ var tableModule = (function(window, $) {
             footer: true
         },
         columns: [{
-            data: "incidntnum",
-            title: "Incident#",
-            name: "incidntnum",
-            visible: false
-        }, {
             data: "date",
             title: "Date",
             name: "date",
@@ -27,38 +22,34 @@ var tableModule = (function(window, $) {
                 return moment(data).format('l')
             }
         }, {
-            data: "time",
-            title: "Time",
-            name: "time",
-            visible: false
+            data: "action",
+            title: "Action",
+            name: "action",
+            render: function(data, type, row, meta) {
+                return data.trim()
+            }
         }, {
-            data: "address",
-            title: "Address",
-            name: "address",
-            visible: false
+            data: "resolution_numbers",
+            title: "Resolution Number",
+            name: "resolution_numbers"
         }, {
-            data: "pddistrict",
-            title: "District",
-            name: "pddistrict",
-            visible: false
+            data: "resolution_letter",
+            title: "Resolution Letter",
+            name: "resolution_letter"
         }, {
             className: "mobile",
             data: "category",
             title: "Category",
             name: "category",
         }, {
-            data: "descript",
-            title: "Description",
-            name: "descript",
-        }, {
             className: "mobile tablet",
-            data: "resolution",
-            title: "Resolution",
-            name: "resolution",
+            data: "type",
+            title: "Type",
+            name: "type",
         }, {
-            data: "cscategory",
-            title: "CSCategory",
-            name: "cscategory",
+            data: "description",
+            title: "Description",
+            name: "description",
         }],
         pageLength: 50,
         footerCallback: function(tfoot, data, start, end, display) {
@@ -173,7 +164,7 @@ var tableModule = (function(window, $) {
     function _loadDataToTable(incidentJson) {
         _table.clear();
 
-        incidentJson = _csCategoryCheck(incidentJson);
+        // incidentJson = _csCategoryCheck(incidentJson);
 
 
         _table.rows.add(incidentJson);

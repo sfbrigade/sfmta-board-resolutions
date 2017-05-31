@@ -1,5 +1,4 @@
 body {
-  margin-top: 25px;
   font-family: "Libre Franklin";
   font-weight: 400;
 }
@@ -46,16 +45,13 @@ a {
   font-weight: 500;
 }
 
-#sfim-controls, #address-control, #slider-control, #date-control{
+#address-control, #slider-control, #date-control{
     padding:0px !important;
 }
 /*#slider-control{
     padding-top:32px !important;
 }*/
-#slider-number-control{
-  padding-right: 25px;
-  padding-left: 25px;
-}
+
 
 #slider-control .slider-body{
   width:250px; 
@@ -69,10 +65,15 @@ a {
   justify-content: space-between;
 }
 
+.map-container {
+  position: relative;
+  padding: 0;
+  height: 615px;
+}
+
 #map{
-   height:500px;
-   margin-top:5px;
-   padding:0px !important;
+  height: 100%;
+  padding:0px !important;
 }
 
 .dropdown-menu {

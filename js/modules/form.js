@@ -59,7 +59,8 @@ var formModule = (function(window, $) {
             },
             startDate: moment(),
             endDate: moment().subtract(29, 'days'),
-            format: 'MM/DD/YYYY'
+            format: 'MM/DD/YYYY',
+            opens: 'right'
         }, function(startDate, endDate) {
             var formattedStartDate = startDate.format('MM/DD/YYYY');
             var formattedEndDate = endDate.format('MM/DD/YYYY');

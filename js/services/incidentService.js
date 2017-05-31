@@ -3,13 +3,27 @@ var incidentService = (function(window, $) {
     var INCIDENTS_API_JSON_URL = resourceEndpointsModule.INCIDENTS_API_JSON_URL;
 
     function _findMostRecentIncident(callback) {
-        var query = "?$select=date,time"
+        var query = "?$select=date"
           + "&$limit=1"
-          + "&$order=date DESC,time DESC";
+          + "&$order=date DESC";
 
         $.get(INCIDENTS_API_JSON_URL + query, function(data) {
             callback(data[0]);
         });
+    }
+
+    function _findAllWithoutGeoParam(searchParams, callback) {
+        var query = _buildAllDataQuery(searchParams);
+        $.get(INCIDENTS_API_JSON_URL + query, callback);
+    }
+
+    function _buildAllDataQuery(params) {
+        return "?$select=*"
+          + "&$where="
+          + "date >= '" + params.startDate + "'"
+          + " AND date <= '" + params.endDate + "'"
+          + "&$order=date DESC"
+          + "&$limit=100000";
     }
 
     function _findIncidentsWithPolygonSearch(searchParams, callback) {
@@ -20,7 +34,7 @@ var incidentService = (function(window, $) {
     function _buildPolygonIncidentDataQuery(params) {
         var wellKnownTextPolygon = _buildWellKnownTextFromGeoJson(params.searchGeoJson);
 
-        return "?$select=location,incidntnum,category,descript,resolution,date,time,pddistrict,address"
+        return "?$select=*"
           + "&$where="
           + "date >= '" + params.startDate + "'"
           + " AND date <= '" + params.endDate + "'"
@@ -43,7 +57,7 @@ var incidentService = (function(window, $) {
     }
 
     function _buildRadialIncidentDataQuery(params) {
-        return "?$select=location,incidntnum,category,descript,resolution,date,time,pddistrict,address"
+        return "?$select=*"
           + "&$where="
           + "date >= '" + params.startDate + "'"
           + " AND date <= '" + params.endDate + "'"
@@ -56,8 +70,10 @@ var incidentService = (function(window, $) {
         findMostRecentIncident: _findMostRecentIncident,
         findIncidentsWithPolygonSearch: _findIncidentsWithPolygonSearch,
         findIncidentsWithRadialSearch: _findIncidentsWithRadialSearch,
+        findAllWithoutGeoParam: _findAllWithoutGeoParam,
         buildPolygonIncidentDataQuery: _buildPolygonIncidentDataQuery,
-        buildRadialIncidentDataQuery: _buildRadialIncidentDataQuery
+        buildRadialIncidentDataQuery: _buildRadialIncidentDataQuery,
+        buildAllDataQuery: _buildAllDataQuery
     };
 
 })(window, jQuery);
