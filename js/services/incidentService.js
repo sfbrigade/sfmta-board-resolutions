@@ -5,7 +5,8 @@ var incidentService = (function(window, $) {
     function _findMostRecentIncident(callback) {
         var query = "?$select=date"
           + "&$limit=1"
-          + "&$order=date DESC";
+          + "&$order=date DESC"
+          + "&$where=date IS NOT NULL";
 
         $.get(INCIDENTS_API_JSON_URL + query, function(data) {
             callback(data[0]);

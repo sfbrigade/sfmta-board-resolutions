@@ -74,6 +74,7 @@ var formModule = (function(window, $) {
 
     function _initializeLastUpdatedDateText() {
         incidentService.findMostRecentIncident(function(mostRecentIncident) {
+            console.log(mostRecentIncident.date)
             $('#data-updated').html('<b>Data available through '
               + moment(mostRecentIncident.date).format('MMMM DD, YYYY')
               + '</b>');
