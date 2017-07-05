@@ -49,6 +49,10 @@ var pageModule = (function(window, $) {
         var query = incidentService.buildAllDataQuery(params);
         datasetLinksModule.refreshDownloadButtonUrls(query);
 
+        if(options.pushState) {
+            historyModule.saveSearchUrl();
+        }
+
         _showLoader();
         incidentService.findAllWithoutGeoParam(params, function(json) {
             _hideLoader();

@@ -267,3 +267,7 @@ footer {
 	    padding:5px 0px !important;
 	}
 }
+
+.leaflet-container h1 {
+  text-align: left;
+}

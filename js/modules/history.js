@@ -12,6 +12,7 @@ var historyModule = (function() {
                 break;
             case 'polygon': return _getPolygonSearchParams();
                 break;
+            default: return null
         }
     }
 

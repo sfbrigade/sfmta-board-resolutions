@@ -18,6 +18,10 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
         'marker-symbol': 'police',
         'marker-size': 'small'
     };*/
+    var METERS_PER_FOOT = 0.3048;
+
+    var searchAreaGroup = L.featureGroup();
+    var incidentLayer, incidentClusterGroup;
 
     var SHAPE_STYLE_SETTINGS = {
         color: '#0033ff',
@@ -33,6 +37,10 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             polygon: { shapeOptions: SHAPE_STYLE_SETTINGS },
             rectangle: { shapeOptions: SHAPE_STYLE_SETTINGS },
             circle: { shapeOptions: SHAPE_STYLE_SETTINGS }
+        },
+        edit: {
+            featureGroup: searchAreaGroup,
+            edit: false
         }
     };
 
@@ -43,22 +51,16 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
         }
     };
 
-    var METERS_PER_FOOT = 0.3048;
-
-    var searchAreaGroup = L.featureGroup();
-    var incidentLayer, incidentClusterGroup;
-
     var map;
 
     function _init() {
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
         map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID);
-
-        var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
+        
         searchAreaGroup.addTo(map);
-
+        var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
         map.on('draw:created', _afterDraw);
-
+        map.on('draw:deleted', _onClearSearchArea);
     }
 
     function _afterDraw(e) {
@@ -131,6 +133,15 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             .addLayer(searchMarkerLayer)
             .addLayer(searchAreaLayer);
     }
+
+    function _onClearSearchArea() {
+        // on clear, reload data without geom
+        viewModelModule.latitude = null;
+        viewModelModule.longitude = null;
+        viewModelModule.searchShapeType = null;
+        pageModule.loadIncidentData({ pushState: true })
+    }
+
     /*_drawIncident function is the actual rendering process of putting a incdidentGeoJson on
     to a map*/
     function _drawIncidents(incidentGeoJson) {
@@ -165,8 +176,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             'relocate': 'g'
         }
         incidentLayer.setGeoJSON(incidentGeoJson).eachLayer(function (layer) {
-          var iconUrl = DEFAULT_ICON
-          iconUrl = './gfx/img_markers_' + layer.feature.properties.category + '_' + actionMapping[layer.feature.properties.action.trim()] + '.png'
+          var iconUrl = './gfx/img_markers_' + layer.feature.properties.category + '_' + actionMapping[layer.feature.properties.action.trim()] + '.png'
           layer.setIcon(L.icon({
             iconUrl: iconUrl,
             iconSize: [40, 40],
@@ -174,7 +184,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             popupAnchor: [-3, -22]
           }))
           incidentClusterGroup.addLayer(layer)
-          layer.bindPopup(_buildIncidentPopupContent(layer.feature.properties))
+          layer.bindPopup(_buildPopupContent(layer.feature.properties))
         })
         incidentLayer.clearLayers();
 
@@ -183,10 +193,15 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
             //.fitBounds(searchAreaGroup.getBounds());
     }
 
-    function _buildIncidentPopupContent(properties) {
-        var newDate = properties.date;
-        var formattedDate = newDate.slice(5,7) + "/" + newDate.slice(8, 10) + "/" + newDate.slice(0,4);
-        return properties.descript + " on " + formattedDate;
+    function _buildPopupContent(properties) {
+        var newDate = properties.date
+        var formattedDate = newDate.slice(5,7) + "/" + newDate.slice(8, 10) + "/" + newDate.slice(0,4)
+        var content = '<h1>Resolution ' + properties.resolution_numbers + ' ' + properties.resolution_letter + '</h1>'
+        content += '<p>' + formattedDate + '</p>'
+        content += '<p>' + properties.action + ' - ' + properties.type + ': ' + properties.description + '</p>'
+        content += '<p><a href="https://sfmta.xtreet.org/docs/sfmta/' + properties.pdf + '" target="_blank">Board meeting minutes (PDF)</a></p>'
+        content += '<p><a href="' + properties.video + '" target="_blank">Board meeting video</a></p>'
+        return content
     }
 
     function _convertFromFeetToMeters(feet) {

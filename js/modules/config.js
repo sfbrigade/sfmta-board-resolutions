@@ -1,23 +1,23 @@
 var configModule = (function (window, $) {
   return {
     rules: {
-      'LARCENY/THEFT': {
-        'NONE': {
+      'biking': {
+        'approve': {
           iconUrl: './gfx/img_markers_biking_g.png'
         },
-        'ARREST, BOOKED': {
+        'deny': {
           iconUrl: './gfx/img_markers_biking_r.png'
         }
       },
-      'ASSAULT': {
-        'NONE': {
+      'parking': {
+        'approve': {
           iconUrl: './gfx/img_markers_parking_g.png'
         },
-        'ARREST, BOOKED': {
+        'deny': {
           iconUrl: './gfx/img_markers_parking_r.png'
         }
       },
-      'VEHICLE THEFT': {
+      'transit': {
         'NONE': {
           iconUrl: './gfx/img_markers_parking_g.png'
         },

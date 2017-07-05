@@ -76,8 +76,6 @@ var formModule = (function(window, $) {
         incidentService.findMostRecentIncident(function(mostRecentIncident) {
             $('#data-updated').html('<b>Data available through '
               + moment(mostRecentIncident.date).format('MMMM DD, YYYY')
-              + ' at '
-              + moment(mostRecentIncident.time, 'HH:mm').format('hh:mm a')
               + '</b>');
         });
     }
