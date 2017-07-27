@@ -190,7 +190,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
 
         map.addLayer(incidentLayer)
             .addLayer(incidentClusterGroup)
-            //.fitBounds(searchAreaGroup.getBounds());
+            .fitBounds(searchAreaGroup.getBounds());
     }
 
     function _buildPopupContent(properties) {

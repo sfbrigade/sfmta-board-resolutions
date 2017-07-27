@@ -52,6 +52,9 @@ a {
     padding-top:32px !important;
 }*/
 
+#address-control {
+  margin-top: 15px;
+}
 
 #slider-control .slider-body{
   width:250px; 
@@ -270,4 +273,8 @@ footer {
 
 .leaflet-container h1 {
   text-align: left;
+}
+
+.legend-img {
+  max-height: 300px;
 }
