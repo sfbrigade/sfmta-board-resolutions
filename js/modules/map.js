@@ -55,8 +55,9 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
 
     function _init() {
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
-        map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID);
-        
+        map = L.map(MAP_CONTAINER_ELEMENT_ID).setView([37.76, -122.407], 12);
+        L.esri.basemapLayer("Gray").addTo(map);
+
         searchAreaGroup.addTo(map);
         var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
         map.on('draw:created', _afterDraw);

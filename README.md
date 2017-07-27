@@ -1,11 +1,44 @@
 # SFMTA Board Resolutions
-More coming...
 
-## Project Needs
- - **Copywriter!** The site needs more and easily understandable information on it. Zero coding required.
- - **User Researcher!** Can you reach out to a university's crime data reporting team, understand their needs (without biasing them), and take notes as they test this application? Zero coding required.
- - **Front-end developer!** Yup. Self-explanatory if you read the above paragraph. Bonus points if you love APIs and are up for the challenge of keeping the whole project browser-based... even the coming versions.
- - **Future project lead!** If you're interested managing in this project, come check it out asap and get up to speed... then build it out so any police department in the country can use it. **Time savings in the multiple thousands of workdays across the entire U.S.**
+
+## Project Needs (+Leads)
+ - **QA Geocoding** Set up a process to fix discrepancies in data and feed them back to the source 
+ - **Change Basemap from Mapbox to ESRI** https://github.com/esri/esri-leaflet 
+ - **Scrape PDFS of board resolutions into machine-readable data** (Nike)
+ - **Develop Product Vision** 
+ - **User-testing** document successes, use-cases, datasets to add, etc.
+
+
+## Current Team Members
+ - **Allan**
+ - **Jason**
+ - **Sergey**
+ - **Scott**
+ - **Nike**
+ - **Kate**
+ - **Sheffield**
+ 
+ 
+ ## Vision: Problems We Hope to Solve
+ - Increase stakeholder engagement around proposed changes to SF's transportation infrastructure
+ 
+ 
+ ## Links
+* Test prototype: http://sfmta.xtreet.org/resolutions-map
+* Get on [Slack](http://c4sf.me/slack)
+  * Add prj-sf-trip4SF as a channel
+* Get on [GitHub](http://c4sf.me/joingithub)
+  * Find sfbrigade/sfmta-board-resolutions
+* Visit Google Drive folder: https://drive.google.com/drive/folders/0B_zAxkoAf-U6NGY1Zlk4UDl2Z28
+* Attend [Code for San Francisco](http://codeforsanfrancisco.org/events) hack nights on Wednesdays from 6-9
+
+
+
+ 
+ 
+ 
+ # Inherited Technical portion of the Read.me from SF Crime Data
+ 
 
  ## Working in Github
   If you want to contribute to this project please follow these instructions:
@@ -36,12 +69,8 @@ If you want to download the github repository and run the code locally on your A
 - run 'python -m SimpleHTTPServer'
 - go to a browser and type in localhost:"PORT_NUMBER"
 
-## Contributing: Getting Started
-* Attend a [Code for San Francisco](http://codeforsanfrancisco.org/events) orientation
-* Get on [Slack](http://c4sf.me/slack)
-  * Add prj-sf-crime-data as a channel
-* Get on [GitHub](http://c4sf.me/joingithub)
-  * Find sfbrigade/sf-crime-data
+
+## Background in Technical Tools Used
 * Add [ZenHub](https://www.zenhub.com/) plug-in to GitHub
   * Review how ZenHub works
 * Review issues on ZenHub boards (within GitHub: sfbrigade/sf-crime-data)
@@ -49,13 +78,10 @@ If you want to download the github repository and run the code locally on your A
   * See readme.md "Running Codebase Locally"
   * See readme.md "Working in Github"
   * Alternately use your GitHub account's hosting option for gh-pages
-* Visit [SF OpenData](https://data.sfgov.org/)
-  * Review [SFPD available data](https://data.sfgov.org/Public-Safety/SFPD-Incidents-from-1-January-2003/tmnf-yvry)
   * Review how to call the API (Export)
 * Visit [Mapbox.com](https://www.mapbox.com/)
   * Review their map offerings
   * Review how to call the API
-* Read the [Wiki](https://github.com/sfbrigade/sf-crime-data/wiki) on GitHub sfbrigade/sf-crime-data
 * If you want to contribute to the code base...
   * Set up a "public hosting" location like GitHub pages or Firebase
   	* This will be used to share your changes for team testing and code reviews
@@ -94,17 +120,3 @@ APIs for maps, geocoding, driving directions, and more"
 [noUiSlider](https://refreshless.com/nouislider/) – "JavaScript Range Slider"
 
 
-## What's Next?
-After speaking with the Crime Data Analysis Unit at the SFPD on 5/6/16 for initial user **research**, the current prototype satisfies their minimum needs. They plan to direct future inquiring universities and colleges directly to [http://sfcrimedata.org]. Great!
-
-However, the prototype has a few things that could be greatly improved (also listed as issues), which were discovered during initial user **testing**. Specifically:
-* Columns displayed on the desktop version of the data table are insufficient (posted in an issue)
-* Would be great for a "Clery Act"-specific report
-* Display the source of the data and when it was last updated
-
-## Wouldn't It Be Cool If...
-When prompted to think about other uses for this web app, the SFPD crime data analysts asked for the following:
-* Ability to overlay data layers, such as PD district laters, sector layers (police beats), political jurisdictions, plots (9sq block areas), and national/state/local parks.
-* Why? Police captains want to see what is going on in their jurisdiction, cops want to see what happened on their beats while they were off duty, the Mayor's Office wants to know what's going on in a particular area, and SFPD in general wants to know what's going on on their turf (hence the park layer). The Crime Data Analysis Team runs regular (weekly) reports for nearly all of these folks and the team could save even MORE time by sharing this web app with the entire SFPD, who could run their own reports by themselves.
-* Ability to see crime data over time (add beginning and ending time period filter).
-* Why? Every single captain of every single district (and anyone else who has to report to constituents) wants to know if they're up or down on crime over a specific period of time.
