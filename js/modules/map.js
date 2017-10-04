@@ -55,13 +55,16 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
 
     function _init() {
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
-        map = L.map(MAP_CONTAINER_ELEMENT_ID).setView([37.76, -122.407], 12);
+        map = L.map(MAP_CONTAINER_ELEMENT_ID, {maxZoom: 16}).setView([37.76, -122.407], 12);
         L.esri.basemapLayer("Gray").addTo(map);
 
         searchAreaGroup.addTo(map);
         var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
         map.on('draw:created', _afterDraw);
         map.on('draw:deleted', _onClearSearchArea);
+        map.on('zoomend', function(){
+            console.log(map.getZoom())
+        })
     }
 
     function _afterDraw(e) {
