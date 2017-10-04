@@ -278,3 +278,135 @@ footer {
 .legend-img {
   max-height: 300px;
 }
+
+
+/*my custom css*/
+.top-main-nav .navbar{
+      border: none;
+    border-radius: 0;
+  }
+.top-main-nav .navbar .container-fluid{
+  padding-top: 8px;
+    padding-bottom: 8px;
+  }
+.top-main-nav .navbar .container-fluid{
+  padding-top: 8px;
+    padding-bottom: 8px;
+  }
+.logo_custom {
+  font-size: 46px;
+}
+ .logo_custom img {
+    width: 35%;
+  }
+#navbar {
+  float: right;
+}
+.navbar-default .navbar-nav>li a em { 
+
+    background: url(../images/icns_sprite_2.png) no-repeat; 
+  background-size: 55px !important;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin: 0 4px 0 0;
+    position: relative;
+    top: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+ -moz-transition: all 0.2s ease-in-out;
+ -o-transition: all 0.2s ease-in-out;
+ -ms-transition: all 0.2s ease-in-out;
+ transition: all 0.2s ease-in-out;
+
+}
+.navbar-default .navbar-nav>li.home-icon a em{ 
+    background-position: 0 0 ;
+}
+.navbar-default .navbar-nav>li.home-icon a:hover em{ 
+background-position: -28px 0 ;
+}
+
+.navbar-default .navbar-nav>li.About-icon a em{  
+  background-position: 0 -27px ;
+}
+.navbar-default .navbar-nav>li.About-icon a:hover em{ 
+background-position: -27px -27px;
+}
+
+.navbar-default .navbar-nav>li.map-icon a em{  
+  background-position: 0 -329px;
+}
+.navbar-default .navbar-nav>li.map-icon a:hover em{ 
+background-position:-31px -329px;
+}
+
+.navbar-default .navbar-nav>li.Docs-icon a em {  
+  background-position: 0 -55px;
+}
+.navbar-default .navbar-nav>li.Docs-icon a:hover em{ 
+background-position:-31px -55px;
+} 
+
+
+.navbar-default .navbar-nav>li.data-icon a em {  
+  background-position: -2px -81px;
+}
+.navbar-default .navbar-nav>li.data-icon a:hover em {  
+background-position: -31px -81px;
+}
+
+
+.navbar-default .navbar-nav>li.Labs-icon a em { 
+   background-position: 0 -110px;
+}
+.navbar-default .navbar-nav>li.Labs-icon a:hover em { 
+   background-position:-26px -110px;
+}
+
+
+.navbar-default .navbar-nav>li.App-icon a em{ 
+     background-position: 0 -136px;
+}
+.navbar-default .navbar-nav>li.App-icon a:hover em{ 
+     background-position: -26px -136px;
+}
+
+
+.navbar-default .navbar-nav>li.Join-icon a em{ 
+     background-position: 0 -356px;
+}
+.navbar-default .navbar-nav>li.Join-icon a:hover em{ 
+     background-position: -30px -356px;
+}
+.footer{
+  background-color: #F1F2F6;
+      height: 30px;
+  }
+.footer p{
+      color: #fff;
+    padding: 5px 0px;
+    margin: 0;
+  }
+.footer p a{
+  color:#fff;
+  }
+.footer p a:hover{
+  color:#9ab6ce;
+  text-decoration:none;
+  }
+.footer p a {
+  color: #425669 !important;
+} 
+.navbar-default {
+  background-color: #f1f2f6;
+  border-color: #e7e7e7;
+}
+/********************************************/
+@media screen and (max-width: 768px)
+{
+  
+  #navbar {
+  float: none;
+}
+
+}
