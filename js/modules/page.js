@@ -55,10 +55,10 @@ var pageModule = (function(window, $) {
 
         _showLoader();
         incidentService.findAllWithoutGeoParam(params, function(json) {
-            _hideLoader();
-            mapModule.drawRecords(_convertJsonToGeoJson(json));
             tableModule.loadDataToTable(json);
+            mapModule.drawRecords(_convertJsonToGeoJson(json)); 
         })
+        _hideLoader();
     }
 
     function _buildParamsWithoutGeo() {

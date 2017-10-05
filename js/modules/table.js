@@ -163,10 +163,6 @@ var tableModule = (function(window, $) {
 
     function _loadDataToTable(incidentJson) {
         _table.clear();
-
-        // incidentJson = _csCategoryCheck(incidentJson);
-
-
         _table.rows.add(incidentJson);
         _table.draw();
     }

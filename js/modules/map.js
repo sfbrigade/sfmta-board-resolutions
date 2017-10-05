@@ -62,6 +62,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
         var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
         map.on('draw:created', _afterDraw);
         map.on('draw:deleted', _onClearSearchArea);
+        pageModule.loadIncidentData();
     }
 
     function _afterDraw(e) {
