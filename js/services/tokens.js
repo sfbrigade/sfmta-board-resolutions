@@ -1,7 +1,7 @@
 var resourceTokensModule = (function(window, $) {
 
     return {
-        MAPBOX_ACCESS_TOKEN: 'pk.eyJ1IjoiY3JpbWVkYXRhc2YiLCJhIjoiY2l2Y296YTl2MDE2bTJ0cGI1NGoyY2RzciJ9.DRX-7gKkJy4FT2Q1Qybb2w',
+        MAPBOX_ACCESS_TOKEN: 'pk.eyJ1IjoiZ2VvamFzb24iLCJhIjoiY2l1NTNlYmIwMGh1dTJ5bzFmYWM4Z3M2aSJ9.JxA6SSvoURhQYi7gbmbZFg',
         MAPZEN_API_KEY: 'search-kz-89WY'
     };
 
