@@ -55,7 +55,7 @@ he icon properties using Mapbox Maki icons replaced with leaflet code*/
 
     function _init() {
         L.mapbox.accessToken = MAPBOX_ACCESS_TOKEN;
-        map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, 'mapbox.light').setView([37.76, -122.407], 12);
+        map = L.mapbox.map(MAP_CONTAINER_ELEMENT_ID, MAPBOX_MAP_STYLE_ID).setView([37.76, -122.407], 12);
 
         searchAreaGroup.addTo(map);
         var drawControl = new L.Control.Draw(DRAW_CONTROL_SETTINGS).addTo(map);
