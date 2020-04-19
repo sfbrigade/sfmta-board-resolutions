@@ -24,7 +24,7 @@
  
  
  ## Links
-* Test prototype: http://sfmta.xtreet.org/resolutions-map
+* Working example: https://www.civichub.us/ca/san-francisco/gov/mta/board/resolutions-map
 * Get on [Slack](http://c4sf.me/slack)
   * Add prj-sf-trip4SF as a channel
 * Get on [GitHub](http://c4sf.me/joingithub)
